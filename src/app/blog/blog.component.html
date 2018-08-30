@@ -1,3 +1,58 @@
-<p>
-  blog works!
-</p>
+<div class="chatroom">
+  <div class="row">
+    <div id="navbar" class="col-md-3 card" >
+      <div class="contact-component">
+        <ul class="nav flex-column" >
+          <div class="info">
+            <h3>{{this.currentUser.username}}</h3>
+            <img src="../assets/img/austin.jpg"/>
+          </div>
+          <div class="">
+            <button (click)="logOut()" type="button" class="logout-btn">Log Out</button>
+          </div>
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" [(ngModel)]="searchText" placeholder="Search">
+            <div class="input-group-append">
+              <button class="searchButton" type="button" id="searchName"><i class="fa fa-search"></i></button>
+            </div>
+          </div>
+          <div class="routers">
+            <a routerLink="/home">| Chats</a>
+            <a routerLink="/contacts">| Contacts</a>
+            <a routerLink="/blog">| Blogs |</a>
+          </div>
+          <li class="nav-item" *ngFor="let user of users | contact : searchText">
+            <a class="nav-link active" *ngFor="let contact of user.contacts">{{contact}}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div id="main-content" class="col-md-9">
+      <div class="card">
+        <div class="card-title center-text">
+          <p>Moments</p>
+        </div>
+      </div>
+      <div class="card center-text">
+        <div class="card-body">
+          <textarea class="" name="post" rows="3" cols="80" placeholder="Post Description" required [(ngModel)]="postText"></textarea>
+          <button class="btn btn-submit" (click)="addPost(postText,postUrl)"> Post</button>
+          <input type="text" [(ngModel)]="postUrl" placeholder="  Add image url">
+        </div>
+        <div class="card-footer">
+        </div>
+      </div>
+      <div *ngFor="let post of posts">
+        <div class="card">
+          <div class="card-body">
+            <p id="blog-post">{{post.description}}</p>
+            <div *ngIf="showImg(post.picture)">
+              <img src={{post.picture}} alt="blog picture" class="post-image">
+            </div>
+            <br>
+            <footer>Posted {{timeSince(post.time)}} ago.</footer>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -12,6 +12,12 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { BlogComponent } from './blog/blog.component';
 import { SignUpComponent } from './signup/signup.component';
+import { ContactComponent } from './contact/contact.component';
+import { UserService } from './services/user.service';
+import { ContactPipe } from './contact.pipe';
+import { KeysPipe } from './keys.pipe';
+// import { RegisterComponent } from './register/register.component';
+
 
 export const firebaseConfig = {
   apiKey: masterFirebaseConfig.apiKey,
@@ -26,7 +32,12 @@ export const firebaseConfig = {
     LoginComponent,
     HomeComponent,
     BlogComponent,
-    SignUpComponent
+    SignUpComponent,
+    ContactComponent,
+    ContactPipe,
+    KeysPipe
+    // RegisterComponent
+    // ContactPipe
   ],
   imports: [
     BrowserModule,
@@ -36,7 +47,7 @@ export const firebaseConfig = {
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

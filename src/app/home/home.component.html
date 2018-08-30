@@ -1,3 +1,40 @@
-<a routerLink="/home">Chats</a> <br>
-<a routerLink="/contacts">Contacts</a> <br>
-<a routerLink="/blog">Blogs</a> <br>
+<div class="chatroom">
+  <div class="row">
+    <div id="navbar" class="col-md-3 card" >
+      <div class="contact-component">
+        <ul class="nav flex-column" >
+          <div class="info">
+            <h2>{{this.user.username}}</h2>
+            <img src="../assets/img/austin.jpg"/>
+          </div>
+          <div class="">
+            <button (click)="logOut()" type="button" class="logout-btn">Log Out</button>
+          </div>
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" [(ngModel)]="searchText" placeholder="Search"><button class="searchButton" type="button" id="searchName" ><i class="fa fa-search"></i></button>
+          </div>
+          <div class="routers">
+              <a routerLink="/home">| Chats</a>
+              <a routerLink="/contacts">| Contacts</a>
+              <a routerLink="/blog">| Blogs |</a>
+          </div>
+          <!-- <li class="nav-item" *ngFor="let user of users | contact : searchText">
+            <a class="nav-link active" *ngFor="let contact of user.contacts">{{contact}}</a>
+          </li> -->
+          <li>List of conversations here</li>
+        </ul>
+      </div>
+    </div>
+    <div id="main-content" class="col-md-9 card">
+      <div id="chat-list" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+        <div [class]="messageClass(message.user)" *ngFor="let message of messages | keys">
+          <h3>{{ getName(message.user) }}: {{ message.message }}</h3>
+        </div>
+      </div>
+      <div id="chat-input">
+        <textarea id="textArea" #textArea></textarea>
+          <button (click)="sendText(textArea.value); textArea.value=''" type="button" id="send-btn" class="login-page-btn">Send</button>
+      </div>
+    </div>
+  </div>
+</div>
